@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ms"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260723-05-e9a76f4"}');</script><script src="/_sdk/e358eac22bd01364.telemetry_sdk.js" integrity="sha512-KPxp3rw4K8Nu9ceWJc3gyM7srgaZxiFWOVbyu260EYzzAqdz10mfo5xyXrCx+wEKtGo77JbtmwXvFLbwrGzwvw=="></script>
+<html lang="ms"><head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260727-05-609cca1"}');</script><script src="/_sdk/728f18890c0241e5.telemetry_sdk.js" integrity="sha512-cMy0xd29wRWs8nyV19fws/+pwQ0u98A3fewCalZ/OWXQXUwzmcx7jKUuZ511uTJlUe1gP0Undii48zuekOylMw=="></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jom Hafal Sifir</title>
@@ -48,27 +48,39 @@
         .finger { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, opacity 0.3s; transform-origin: bottom center; }
         .finger.folded { transform: scaleY(0.2) translateY(30px); opacity: 0.5; }
         .hand-container { position: relative; width: 140px; height: 130px; background: #fff5f7; border-radius: 50% 50% 20% 20% / 40% 40% 10% 10%; border: 3px solid #fecdd3; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
+        @keyframes menu-press { 0% { transform: scale(1); text-shadow: 0 2px 4px rgba(0,0,0,0.3); } 50% { transform: scale(0.92); text-shadow: 0 0 12px rgba(212,175,55,0.6); } 100% { transform: scale(1); text-shadow: 0 2px 4px rgba(0,0,0,0.3); } }
+        .menu-title-btn:active { animation: menu-press 0.3s ease-out; }
     </style>
   <script src="/_sdk/935a53bc2e11fb8d.data_sdk.js" type="text/javascript" integrity="sha512-qr2oyPnEys1WebcOABaRh6hG77r5PWpqeWW6JTKbRJqly/INsfBi31CVNlTmHqjgeLpkVmmHZJUdxSx/32tOFQ=="></script>
   <script src="/_sdk/6030e540d4419216.resizing_sdk.js" type="text/javascript" integrity="sha512-b5KWzyoXsbWP4smq4sftIi6Kts4YVBpBsz0BwCViwbBJkK64a3/Z6ZMdWA+qnplNcXw4mhZeqvQi3mOosiRJdA=="></script>
  </head>
- <body data-template-id="__page-root" class="min-h-screen w-full overflow-x-hidden" style="background: linear-gradient(160deg, rgb(224, 247, 250), rgb(255, 249, 196), rgb(200, 230, 201), rgb(248, 187, 208));"><!-- SPLASH / LOADING SCREEN -->
-  <section id="splash-screen" class="fixed inset-0 z-[10010] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center p-4">
-   <div class="text-center fade-in-zoom">
-    <div class="w-36 h-36 bg-white rounded-3xl premium-shadow p-2 flex items-center justify-center mx-auto mb-6 float"><img data-template-id="splash-logo" class="canva-image w-full h-full object-contain rounded-2xl" loading="lazy" src="./file_00000000d0348206b129a5b416dda90c.png" alt="Sifir Hero Logo">
+ <body data-template-id="__page-root" class="min-h-screen w-full overflow-x-hidden" style="background: linear-gradient(rgb(15, 45, 92), rgb(6, 27, 58));">
+  <!-- SPLASH / LOADING SCREEN -->
+  <section id="splash-screen" class="fixed inset-0 z-[10010] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4 w-full">
+   <div class="text-center fade-in-zoom flex flex-col items-center justify-center">
+    <div class="w-36 h-36 bg-white rounded-3xl premium-shadow p-2 flex items-center justify-center mb-6 float">
+     <img data-template-id="splash-logo" class="canva-image w-full h-full object-contain rounded-2xl" loading="lazy" src="canva://MAHQOXZyeNw/1" alt="Sifir Hero Logo">
     </div>
     <h1 data-template-id="splash-title" class="canva-text text-3xl font-extrabold text-purple-800 tracking-wide" style="color: rgb(109, 40, 217); font-weight: 700; font-style: normal; font-size: 36px;">Sifir Hero</h1>
     <p data-template-id="splash-subtitle" class="canva-text text-sm text-purple-600 font-bold mt-2 animate-pulse" style="color: rgb(124, 58, 237); font-weight: 700; font-style: normal; font-size: 18px;">Jom Hafal Sifir! ⚡</p>
    </div>
-  </section><!-- STUDENT SELECTION & PROFILE MANAGEMENT SCREEN -->
-  <section id="page-select-student" class="fixed inset-0 z-[10005] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4">
-   <div class="max-w-md w-full bg-white rounded-3xl premium-shadow p-6 text-center slide-up pop-in">
+  </section><!-- STUDENT SELECTION & PROFILE MANAGEMENT SCREEN --> <!-- CHANGE PROFILE PICTURE MODAL -->
+  <section id="modal-change-profile-pic" class="fixed inset-0 z-[10010] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+   <div class="max-w-xs w-full bg-white rounded-2xl p-6 shadow-2xl pop-in">
+    <h3 class="text-lg font-extrabold text-gray-800 mb-4 text-center">🖼️ Tukar Gambar Profil</h3>
+    <div class="space-y-3"><button onclick="triggerProfilePictureUpload()" class="btn-bounce glossy w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md"> 🖼️ Pilih dari Galeri </button> <button onclick="closeProfilePicModal()" class="btn-bounce glossy w-full py-3 rounded-xl bg-gray-200 text-gray-700 font-bold text-sm flex items-center justify-center gap-2"> ❌ Batal </button>
+    </div>
+   </div>
+  </section><!-- Hidden file input for profile picture upload --> <input id="profile-pic-input" type="file" accept="image/*" class="hidden" onchange="handleProfilePictureSelected(event)"><!-- STUDENT SELECTION & PROFILE MANAGEMENT SCREEN -->
+  <section id="page-select-student" class="fixed inset-0 z-[10005] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4 w-full" style="min-height: 100vh;">
+   <div class="max-w-md w-full bg-white rounded-3xl premium-shadow p-6 text-center pop-in flex flex-col items-center justify-center max-h-[90vh] overflow-y-auto">
     <div class="w-20 h-20 bg-gradient-to-tr from-purple-400 to-pink-400 rounded-full mx-auto flex items-center justify-center text-4xl shadow-md mb-4 float">
      👩‍🎓
     </div>
     <h2 data-template-id="select-student-title" class="canva-text text-2xl font-extrabold mb-1 text-purple-800" style="color: rgb(109, 40, 217); font-weight: 800; font-style: normal; font-size: 26px;">Pilih Pelajar</h2>
     <p data-template-id="select-student-subtitle" class="canva-text text-sm text-gray-500 mb-6 font-medium" style="color: rgb(75, 85, 99); font-weight: 500; font-style: normal; font-size: 16px;">Sila pilih profil atau tambah profil baharu</p>
-    <div id="student-profiles-list" class="space-y-3 max-h-60 overflow-y-auto pr-1 mb-6"><!-- Dynamic Student Profiles Rendered Here -->
+    <div id="student-profiles-list" class="space-y-3 max-h-60 overflow-y-auto pr-1 mb-6 w-full">
+     <!-- Dynamic Student Profiles Rendered Here -->
     </div><button onclick="showCreateProfileForm()" class="btn-bounce glossy w-full py-3 rounded-2xl font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 premium-shadow flex items-center justify-center gap-2"> <i data-lucide="plus" style="width:20px;height:20px"></i> <span>Tambah Pelajar Baharu</span> </button>
    </div>
   </section><!-- EDIT PROFILE MODAL OVERLAY -->
@@ -76,97 +88,144 @@
    <div class="max-w-xs w-full bg-white rounded-2xl p-6 shadow-2xl pop-in">
     <h3 class="text-lg font-extrabold text-gray-800 mb-4">Kemas Kini Profil</h3>
     <div class="space-y-4">
-     <div><label for="edit-student-name" class="block text-xs font-bold text-gray-600 mb-1">Nama Baharu</label> <input id="edit-student-name" type="text" class="w-full px-3 py-2 border rounded-xl font-bold text-gray-800 focus:outline-none focus:border-purple-500">
+     <div>
+      <label for="edit-student-name" class="block text-xs font-bold text-gray-600 mb-1">Nama Baharu</label> <input id="edit-student-name" type="text" class="w-full px-3 py-2 border rounded-xl font-bold text-gray-800 focus:outline-none focus:border-purple-500">
      </div>
-     <div class="flex gap-2"><button onclick="closeEditModal()" class="flex-1 py-2 rounded-xl bg-gray-200 font-bold text-gray-700 text-sm">Batal</button> <button onclick="saveProfileEdit()" class="flex-1 py-2 rounded-xl bg-purple-600 text-white font-bold text-sm">Simpan</button>
+     <div class="flex gap-2">
+      <button onclick="closeEditModal()" class="flex-1 py-2 rounded-xl bg-gray-200 font-bold text-gray-700 text-sm">Batal</button> <button onclick="saveProfileEdit()" class="flex-1 py-2 rounded-xl bg-purple-600 text-white font-bold text-sm">Simpan</button>
      </div>
     </div>
    </div>
   </section><!-- DELETE PROFILE MODAL OVERLAY -->
   <section id="modal-delete-profile" class="fixed inset-0 z-[10010] bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 hidden">
    <div class="max-w-xs w-full bg-white rounded-2xl p-6 shadow-2xl pop-in text-center">
-    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 text-red-600">
-     <i data-lucide="trash-2" style="width:24px;height:24px"></i>
+    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 text-red-600"><i data-lucide="trash-2" style="width:24px;height:24px"></i>
     </div>
     <h3 class="text-lg font-extrabold text-gray-800 mb-2">Padam Profil</h3>
     <p class="text-sm text-gray-500 mb-5">Adakah anda pasti mahu memadam profil pelajar ini?</p>
-    <div class="flex gap-2">
-     <button onclick="closeDeleteModal()" class="flex-1 py-2 rounded-xl bg-gray-100 font-bold text-gray-700 text-sm">❌ Batal</button> <button onclick="confirmDeleteStudentProfile()" class="flex-1 py-2 rounded-xl bg-red-600 text-white font-bold text-sm">✅ Padam</button>
+    <div class="flex gap-2"><button onclick="closeDeleteModal()" class="flex-1 py-2 rounded-xl bg-gray-100 font-bold text-gray-700 text-sm">❌ Batal</button> <button onclick="confirmDeleteStudentProfile()" class="flex-1 py-2 rounded-xl bg-red-600 text-white font-bold text-sm">✅ Padam</button>
     </div>
    </div>
   </section><!-- WELCOME SCREEN (Only for creating / first setting up) -->
-  <section id="page-welcome" class="fixed inset-0 z-[10000] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4 hidden">
-   <div class="max-w-md w-full bg-white rounded-3xl premium-shadow p-8 text-center slide-up pop-in">
-    <div class="w-24 h-24 bg-white rounded-2xl mx-auto flex items-center justify-center p-1.5 shadow-lg mb-6 float"><img data-template-id="welcome-logo" class="canva-image w-full h-full object-contain rounded-xl" loading="lazy" src="./file_00000000d0348206b129a5b416dda90c.png" alt="Sifir Hero Logo">
+  <section id="page-welcome" class="fixed inset-0 z-[10000] bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-4 hidden w-full" style="min-height: 100vh;">
+   <div class="max-w-md w-full bg-white rounded-3xl premium-shadow p-8 text-center pop-in max-h-[90vh] overflow-y-auto">
+    <div class="w-24 h-24 bg-white rounded-2xl mx-auto flex items-center justify-center p-1.5 shadow-lg mb-6 float">
+     <img data-template-id="welcome-logo" class="canva-image w-full h-full object-contain rounded-xl" loading="lazy" src="canva://MAHQOXZyeNw/1" alt="Sifir Hero Logo">
     </div>
     <h2 data-template-id="welcome-title" class="canva-text text-3xl font-extrabold mb-2 text-purple-800" style="color: rgb(109, 40, 217); font-weight: 800; font-style: normal; font-size: 26px;">Selamat Datang! 👋</h2>
     <p data-template-id="welcome-subtitle" class="canva-text text-gray-600 mb-6 font-medium" style="color: rgb(75, 85, 99); font-weight: 500; font-style: normal; font-size: 16px;">Sila masukkan nama pelajar untuk mula belajar.</p>
     <form id="welcome-form" onsubmit="saveStudentName(event)" class="space-y-4">
-     <div class="text-left">
-      <label data-template-id="label-student-name" for="student-name-input" class="canva-text block text-sm font-bold text-gray-700 mb-1" style="color: rgb(75, 85, 99); font-weight: 700; font-style: normal; font-size: 18px;">👤 Nama Pelajar</label> <input id="student-name-input" type="text" required="" class="w-full px-4 py-3 rounded-2xl border-2 border-purple-200 focus:border-purple-500 focus:outline-none text-lg font-bold text-gray-800 shadow-inner" placeholder="Cth: Aiman">
+     <div class="text-left"><label data-template-id="label-student-name" for="student-name-input" class="canva-text block text-sm font-bold text-gray-700 mb-1" style="color: rgb(75, 85, 99); font-weight: 700; font-style: normal; font-size: 18px;">👤 Nama Pelajar</label> <input id="student-name-input" type="text" required="" class="w-full px-4 py-3 rounded-2xl border-2 border-purple-200 focus:border-purple-500 focus:outline-none text-lg font-bold text-gray-800 shadow-inner" placeholder="Cth: Aiman">
      </div><button data-template-id="btn-mula-belajar" type="submit" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 premium-shadow" style="background: linear-gradient(135deg, rgb(167, 139, 250), rgb(244, 114, 182)); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">🚀 Mula Belajar</button>
     </form><!-- YEAR SELECTION STEP -->
     <div id="welcome-year-step" class="hidden space-y-4 pt-2">
      <p data-template-id="welcome-year-subtitle" class="canva-text text-gray-600 font-bold mb-4" style="color: rgb(75, 85, 99); font-weight: 700; font-style: normal; font-size: 16px;">Sila pilih tahun persekolahan anda:</p>
-     <div class="grid grid-cols-1 gap-2 text-left"><button onclick="selectStudentYear('Prasekolah')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-pink-200 hover:border-pink-400 bg-pink-50 text-pink-950 flex items-center gap-3">🌈 Prasekolah</button> <button onclick="selectStudentYear('Tahun 1')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-blue-200 hover:border-blue-400 bg-blue-50 text-blue-950 flex items-center gap-3">📘 Tahun 1</button> <button onclick="selectStudentYear('Tahun 2')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-green-200 hover:border-green-400 bg-green-50 text-green-950 flex items-center gap-3">📗 Tahun 2</button> <button onclick="selectStudentYear('Tahun 3')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-orange-200 hover:border-orange-400 bg-orange-50 text-orange-950 flex items-center gap-3">📙 Tahun 3</button> <button onclick="selectStudentYear('Tahun 4')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-red-200 hover:border-red-400 bg-red-50 text-red-950 flex items-center gap-3">📕 Tahun 4</button> <button onclick="selectStudentYear('Tahun 5')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-purple-200 hover:border-purple-400 bg-purple-50 text-purple-950 flex items-center gap-3">📔 Tahun 5</button> <button onclick="selectStudentYear('Tahun 6')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-yellow-200 hover:border-yellow-400 bg-yellow-50 text-yellow-950 flex items-center gap-3">📒 Tahun 6</button>
+     <div class="grid grid-cols-1 gap-2 text-left">
+      <button onclick="selectStudentYear('Prasekolah')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-pink-200 hover:border-pink-400 bg-pink-50 text-pink-950 flex items-center gap-3">🌈 Prasekolah</button> <button onclick="selectStudentYear('Tahun 1')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-blue-200 hover:border-blue-400 bg-blue-50 text-blue-950 flex items-center gap-3">📘 Tahun 1</button> <button onclick="selectStudentYear('Tahun 2')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-green-200 hover:border-green-400 bg-green-50 text-green-950 flex items-center gap-3">📗 Tahun 2</button> <button onclick="selectStudentYear('Tahun 3')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-orange-200 hover:border-orange-400 bg-orange-50 text-orange-950 flex items-center gap-3">📙 Tahun 3</button> <button onclick="selectStudentYear('Tahun 4')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-red-200 hover:border-red-400 bg-red-50 text-red-950 flex items-center gap-3">📕 Tahun 4</button> <button onclick="selectStudentYear('Tahun 5')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-purple-200 hover:border-purple-400 bg-purple-50 text-purple-950 flex items-center gap-3">📔 Tahun 5</button> <button onclick="selectStudentYear('Tahun 6')" class="btn-bounce w-full py-3 px-4 rounded-xl font-bold border-2 border-yellow-200 hover:border-yellow-400 bg-yellow-50 text-yellow-950 flex items-center gap-3">📒 Tahun 6</button>
      </div>
     </div>
    </div>
-  </section><!-- Profile Header -->
-  <header class="pt-4 px-4">
-   <div class="max-w-lg mx-auto flex items-center gap-3 bg-white/70 backdrop-blur rounded-2xl p-3 premium-shadow">
-    <div class="w-14 h-14 bg-white rounded-xl shadow flex items-center justify-center p-1 border-2 border-purple-200 flex-shrink-0">
-     <img data-template-id="app-header-logo" class="canva-image w-full h-full object-contain rounded-lg" loading="lazy" src="./file_00000000d0348206b129a5b416dda90c.png"" alt="Sifir Hero Logo">
-    </div>
-    <div class="flex-1 min-w-0">
-     <h1 data-template-id="app-title" class="canva-text text-xl font-extrabold truncate" style="color: rgb(124, 58, 237); font-weight: 800; font-style: normal; font-size: 22px;">🌈 Jom Hafal Sifir! 🌈</h1>
-     <div class="flex items-center gap-1.5 truncate">
-      <p id="header-student-name" class="text-sm font-bold text-purple-600 truncate"></p><span id="header-student-year" onclick="triggerChangeYear()" class="cursor-pointer px-2 py-0.5 rounded-md bg-purple-100 text-purple-700 text-xs font-bold hover:bg-purple-200 transition-colors">Tahun 1 ⚙️</span> <button onclick="logoutToStudentSelection()" class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 text-xs font-bold hover:bg-rose-200 transition-colors flex items-center gap-0.5"> <i data-lucide="users" style="width:12px;height:12px"></i> Switch </button>
-     </div>
-     <div class="flex items-center gap-3 text-sm mt-0.5">
-      <span class="flex items-center gap-1">⭐ <strong id="star-count">0</strong></span> <span class="flex items-center gap-1">🏅 <strong id="badge-count">0</strong></span> <span id="level-display" class="px-2 py-0.5 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white text-xs font-bold">Lvl 1</span>
+  </section><!-- Premium Profile Header Panel -->
+  <header class="pt-0 px-0"><!-- Hero Banner Section -->
+   <div class="w-full bg-gradient-to-b from-yellow-100 to-orange-100 py-0 px-0 text-center relative overflow-hidden">
+    <img data-template-id="banner-hero-image" class="canva-image w-full h-auto object-cover" loading="lazy" style="display: block;" src="canva://MAHQkQ0mwCc/1" alt="Jom Hafal Sifir hero banner with colorful children, numbers, and books">
+   </div><!-- Premium Profile Panel -->
+   <div class="w-full bg-gradient-to-b from-blue-900 to-blue-950 px-4 py-5 border-b-4 border-amber-400">
+    <div class="max-w-lg mx-auto"><!-- Top Row: Avatar + Name/Year + Switch -->
+     <div class="flex items-center gap-3 mb-3"><!-- Avatar Circle --> <button id="avatar-button" onclick="openProfilePicModal()" class="w-16 h-16 bg-gradient-to-br from-amber-300 to-yellow-400 rounded-full shadow-lg flex items-center justify-center flex-shrink-0 border-4 border-white overflow-hidden focus:outline-none focus:ring-2 focus:ring-amber-300 cursor-pointer transition-transform hover:scale-105" style="position: relative;"> <img id="avatar-image" class="w-full h-full object-cover" style="display: none;"> <span id="avatar-icon" class="text-3xl">👤</span> </button><!-- Name and Year Info -->
+      <div class="flex-1 min-w-0">
+       <p id="header-student-name" class="text-lg font-extrabold text-white truncate"></p>
+       <div class="flex items-center gap-2 mt-1"><button id="header-student-year" onclick="triggerChangeYear()" class="cursor-pointer px-3 py-1 rounded-full bg-amber-300 text-blue-900 text-xs font-bold hover:bg-amber-200 transition-colors flex items-center gap-1 shadow-md"> 📚 <span id="year-display">Tahun 1</span> </button> <button onclick="goHome()" class="px-3 py-1 rounded-full bg-amber-300 text-blue-900 text-xs font-bold hover:bg-amber-200 transition-colors flex items-center gap-1 shadow-md"> 🏠 Home </button> <button onclick="logoutToStudentSelection()" class="px-3 py-1 rounded-full bg-amber-300 text-blue-900 text-xs font-bold hover:bg-amber-200 transition-colors flex items-center gap-1 shadow-md"> 👥 Switch </button>
+       </div>
+      </div>
+     </div><!-- Bottom Row: Stats Grid -->
+     <div class="grid grid-cols-4 gap-2"><!-- Stars -->
+      <div class="bg-white/10 backdrop-blur rounded-xl p-2 text-center border border-amber-300/30">
+       <p class="text-2xl">⭐</p>
+       <p class="text-white font-extrabold text-lg" id="star-count">0</p>
+       <p class="text-xs text-amber-200 font-bold">Markah</p>
+      </div><!-- Badges -->
+      <div class="bg-white/10 backdrop-blur rounded-xl p-2 text-center border border-amber-300/30">
+       <p class="text-2xl">🏅</p>
+       <p class="text-white font-extrabold text-lg" id="badge-count">0</p>
+       <p class="text-xs text-amber-200 font-bold">Lencana</p>
+      </div><!-- Level -->
+      <div class="bg-white/10 backdrop-blur rounded-xl p-2 text-center border border-amber-300/30">
+       <p class="text-2xl">⬆️</p>
+       <p class="text-white font-extrabold text-lg" id="level-display">1</p>
+       <p class="text-xs text-amber-200 font-bold">Level</p>
+      </div><!-- Stats Button -->
+      <div class="bg-gradient-to-br from-amber-300 to-amber-400 rounded-xl p-2 text-center border-2 border-white shadow-md cursor-pointer hover:shadow-lg transition-shadow" onclick="showStats()">
+       <p class="text-2xl">📊</p>
+       <p class="text-blue-900 font-extrabold text-xs">Prestasi</p>
+      </div>
      </div>
     </div>
    </div>
   </header>
-  <main class="max-w-lg mx-auto px-4 pb-8 pt-4">
-   <!-- HOME -->
+  <main class="max-w-lg mx-auto px-4 pb-8 pt-4"><!-- HOME -->
    <section id="page-home" class="slide-up">
-    <div class="bg-white/80 rounded-2xl p-4 mb-4 text-center premium-shadow">
-     <p id="home-greeting" class="text-lg font-extrabold text-purple-700"></p>
+    <!-- GREETING -->
+    <div class="bg-white/10 backdrop-blur rounded-2xl p-4 mb-5 text-center border border-amber-400/20 shadow-lg">
+     <p id="home-greeting" class="text-lg font-extrabold text-amber-300"></p>
     </div>
-    <p data-template-id="home-subtitle" class="canva-text text-center mb-4" style="color: rgb(75, 85, 99); font-weight: 500; font-style: normal; font-size: 16px;">Pilih sifir untuk mula belajar ⬇️</p>
-    <div class="grid grid-cols-4 gap-2 mb-5" id="sifir-grid"></div>
-    <div class="flex flex-col gap-3">
-     <button data-template-id="btn-latihan" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow" onclick="showPracticeSetup()" style="background: linear-gradient(135deg, rgb(147, 197, 253), rgb(96, 165, 250)); color: rgb(30, 58, 95); font-weight: 700; font-style: normal; font-size: 18px;">📝 Latihan</button> <button data-template-id="btn-kuiz" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow" onclick="showQuizSetup()" style="background: linear-gradient(135deg, rgb(110, 231, 183), rgb(52, 211, 153)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">⏱️ Kuiz</button> <button data-template-id="btn-permainan" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow" onclick="showGamesMenu()" style="background: linear-gradient(135deg, rgb(253, 164, 175), rgb(244, 114, 182)); color: rgb(127, 29, 29); font-weight: 700; font-style: normal; font-size: 18px;">🎮 Permainan</button> <button data-template-id="btn-cara-mudah" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow" onclick="showCaraMudahMenu()" style="background: linear-gradient(135deg, rgb(253, 230, 138), rgb(251, 191, 36)); color: rgb(120, 53, 15); font-weight: 700; font-style: normal; font-size: 18px;">💡 Cara Mudah Hafal Sifir</button> <button data-template-id="btn-prestasi" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow hidden" onclick="showStats()" style="background: linear-gradient(135deg, rgb(196, 181, 253), rgb(167, 139, 250)); color: rgb(76, 29, 149); font-weight: 700; font-style: normal; font-size: 18px;">📊 Prestasi Saya</button>
-    </div>
-    <div class="mt-5 text-center">
-     <p data-template-id="badges-title" class="canva-text font-bold mb-2" style="color: rgb(146, 64, 14); font-weight: 700; font-style: normal; font-size: 16px;">Lencana Saya 🏅</p>
+    <p data-template-id="home-subtitle" class="canva-text text-center mb-6 text-gray-300" style="color: rgb(212, 175, 55); font-weight: 500; font-style: normal; font-size: 16px;">Pilih menu di bawah untuk mula belajar ⬇️</p><!-- 2x3 GRID MENU WITH POSTERS -->
+    <div class="grid grid-cols-2 gap-6 mb-6"><!-- 1. Belajar Sifir -->
+     <div class="flex flex-col items-center gap-3">
+      <img data-template-id="belajar-sifir-illustration" class="canva-image w-full aspect-square object-cover rounded-xl shadow-lg" loading="lazy" src="canva://MAHQj_hgMME/1" alt="Colorful Jom Hafal Sifir illustration with two happy children holding multiplication book"> <button class="menu-pill-btn btn-bounce font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 transition-all duration-200 shadow-md" onclick="showSifirList()">📚 MULA BELAJAR</button>
+     </div><!-- 2. Latihan -->
+     <div class="flex flex-col items-center gap-3">
+      <img data-template-id="latihan-illustration" class="canva-image w-full aspect-square object-cover rounded-xl shadow-lg" loading="lazy" src="canva://MAHQjzjHg-Y/1" alt="Latihan poster with happy child practicing multiplication exercises"> <button class="menu-pill-btn btn-bounce font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 transition-all duration-200 shadow-md" onclick="showPracticeSetup()">✏️ MULA LATIHAN</button>
+     </div><!-- 3. Kuiz -->
+     <div class="flex flex-col items-center gap-3">
+      <img data-template-id="kuiz-illustration" class="canva-image w-full aspect-square object-cover rounded-xl shadow-lg" loading="lazy" src="canva://MAHQkNRceSU/1" alt="KUIZ poster with two children excited about quiz and multiplication questions"> <button class="menu-pill-btn btn-bounce font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 transition-all duration-200 shadow-md" onclick="showQuizSetup()">⏰ MULA KUIZ</button>
+     </div><!-- 4. Permainan -->
+     <div class="flex flex-col items-center gap-3">
+      <img data-template-id="permainan-illustration" class="canva-image w-full aspect-square object-cover rounded-xl shadow-lg" loading="lazy" src="canva://MAHQkP8U4Ro/1" alt="A child playing indoors, stacking colorful wooden toy blocks with joyful illustrations."> <button class="menu-pill-btn btn-bounce font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 transition-all duration-200 shadow-md" onclick="showGamesMenu()">🎮 JOM MAIN</button>
+     </div><!-- 5. Tips Sifir (Cara Mudah) -->
+     <div class="flex flex-col items-center gap-3">
+      <img data-template-id="tips-hafal-sifir-poster" class="canva-image w-full aspect-square object-cover rounded-xl shadow-lg" loading="lazy" src="canva://MAHQkdO9uGI/1" alt="Bright numbers and symbols for multiplication equation on pastel green surface."> <button class="menu-pill-btn btn-bounce font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 transition-all duration-200 shadow-md" onclick="showCaraMudahMenu()">💡 LIHAT TIPS</button>
+     </div><!-- 6. Coming Soon -->
+     <div class="flex flex-col items-center gap-3">
+      <div class="w-full aspect-square bg-white/10 border-2 border-white/20 rounded-xl flex items-center justify-center text-4xl opacity-60">
+       🚧
+      </div><button class="menu-pill-btn font-extrabold text-white uppercase tracking-wider text-xs px-4 py-2 rounded-full border-2 border-[#D4AF37] bg-gradient-to-r from-blue-900 to-blue-800 opacity-50 cursor-not-allowed" disabled="">🚧 AKAN DATANG</button>
+     </div>
+    </div><!-- Hidden native legacy Prestasi button preserved for program integrity --> <button id="btn-prestasi" class="hidden" onclick="showStats()"></button>
+    <div class="mt-6 text-center">
+     <p data-template-id="badges-title" class="canva-text font-bold mb-2 text-[#D4AF37]" style="color: rgb(146, 64, 14); font-weight: 700; font-style: normal; font-size: 16px;">Lencana Saya 🏅</p>
      <div id="badges-container" class="flex flex-wrap justify-center gap-2"></div>
     </div>
+   </section><!-- SIFIR LIST SELECTOR -->
+   <section id="page-sifir-list" class="hidden slide-up">
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 data-template-id="sifir-list-title" class="canva-text text-xl font-bold" style="color: rgb(124, 58, 237); font-weight: 700; font-style: normal; font-size: 22px;">📁 Senarai Sifir 1 - 12</h2>
+     <div class="w-10"></div>
+    </div>
+    <div class="grid grid-cols-3 gap-3" id="sifir-buttons-container"></div>
    </section><!-- PRACTICE SETUP --> <!-- PRACTICE SETUP -->
    <section id="page-practice-setup" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
      <h2 data-template-id="practice-setup-title" class="canva-text text-xl font-bold" style="color: rgb(30, 64, 175); font-weight: 700; font-style: normal; font-size: 22px;">📝 Pilihan Mod Latihan</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-6 space-y-6">
      <div>
       <p data-template-id="practice-sifir-label" class="canva-text font-bold text-gray-700 mb-3" style="color: rgb(30, 64, 175); font-weight: 700; font-style: normal; font-size: 18px;">Langkah 1: Pilih Sifir</p>
-      <div id="practice-sifir-grid" class="grid grid-cols-4 gap-2 mb-4"><!-- Generated by JS: buttons for Sifir 1 to 12 -->
+      <div id="practice-sifir-grid" class="grid grid-cols-4 gap-2 mb-4">
+       <!-- Generated by JS: buttons for Sifir 1 to 12 -->
       </div>
      </div>
      <div id="practice-count-section" class="hidden">
       <p data-template-id="practice-count-label" class="canva-text font-bold text-gray-700 mb-3" style="color: rgb(55, 65, 81); font-weight: 700; font-style: normal; font-size: 18px;">Pilih Bilangan Soalan:</p>
-      <div class="grid grid-cols-4 gap-2 mb-4"><button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(5, this)">5</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-500 text-white bg-blue-500" onclick="selectPracticeCount(10, this)">10</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(20, this)">20</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(30, this)">30</button>
+      <div class="grid grid-cols-4 gap-2 mb-4">
+       <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(5, this)">5</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-500 text-white bg-blue-500" onclick="selectPracticeCount(10, this)">10</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(20, this)">20</button> <button class="practice-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-blue-200 text-blue-800 bg-white" onclick="selectPracticeCount(30, this)">30</button>
       </div>
      </div><button id="btn-start-practice-wrapper" data-template-id="btn-mula-latihan" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow text-white bg-gradient-to-r from-blue-500 to-indigo-500 hidden" onclick="startPractice()" style="background: linear-gradient(135deg, rgb(96, 165, 250), rgb(79, 70, 229)); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">🚀 Mula Latihan</button>
     </div>
    </section><!-- QUIZ SETUP -->
    <section id="page-quiz-setup" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
      <h2 data-template-id="quiz-setup-title" class="canva-text text-xl font-bold" style="color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 22px;">⏱️ Pilihan Mod Kuiz</h2>
      <div class="w-10"></div>
     </div>
@@ -174,29 +233,27 @@
      <div>
       <p data-template-id="quiz-sifir-label" class="canva-text text-gray-700 hidden" style="color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">Langkah 1: Pilih Sifir</p>
       <p data-template-id="quiz-count-label" class="canva-text font-bold text-gray-700 mb-3" style="color: rgb(55, 65, 81); font-weight: 700; font-style: normal; font-size: 18px;">Pilih Bilangan Soalan:</p>
-      <div class="grid grid-cols-4 gap-2 mb-4"><button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(5, this)">5</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(10, this)">10</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-500 text-white bg-emerald-500" onclick="selectQuizCount(20, this)">20</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(30, this)">30</button>
+      <div class="grid grid-cols-4 gap-2 mb-4">
+       <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(5, this)">5</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(10, this)">10</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-500 text-white bg-emerald-500" onclick="selectQuizCount(20, this)">20</button> <button class="quiz-num-btn btn-bounce py-3 rounded-xl font-bold text-lg border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectQuizCount(30, this)">30</button>
       </div>
      </div><button id="btn-start-quiz-wrapper" data-template-id="btn-mula-kuiz" class="canva-button btn-bounce glossy w-full py-4 rounded-2xl text-lg font-bold premium-shadow text-white bg-gradient-to-r from-emerald-500 to-green-500 hidden" onclick="startQuiz()" style="background: linear-gradient(135deg, rgb(52, 211, 153), rgb(5, 150, 105)); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">🚀 Mula Kuiz</button>
     </div>
    </section><!-- LEARN -->
    <section id="page-learn" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 id="learn-title" class="text-2xl font-bold"></h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 id="learn-title" class="text-2xl font-bold text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)"></h2>
      <div class="w-10"></div>
     </div>
     <div id="learn-content" class="bg-white rounded-3xl premium-shadow p-6 text-center"></div>
-    <div class="flex justify-between mt-4">
-     <button data-template-id="btn-sebelumnya" class="canva-button btn-bounce glossy px-6 py-3 rounded-full font-bold shadow" onclick="learnPrev()" style="background: linear-gradient(135deg, rgb(253, 230, 138), rgb(251, 191, 36)); color: rgb(120, 53, 15); font-weight: 700; font-style: normal; font-size: 18px;">⬅️ Sebelumnya</button> <button data-template-id="btn-seterusnya" class="canva-button btn-bounce glossy px-6 py-3 rounded-full font-bold shadow" onclick="learnNext()" style="background: linear-gradient(135deg, rgb(167, 243, 208), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">Seterusnya ➡️</button>
+    <div class="flex justify-between mt-4"><button data-template-id="btn-sebelumnya" class="canva-button btn-bounce glossy px-6 py-3 rounded-full font-bold shadow" onclick="learnPrev()" style="background: linear-gradient(135deg, rgb(253, 230, 138), rgb(251, 191, 36)); color: rgb(120, 53, 15); font-weight: 700; font-style: normal; font-size: 18px;">⬅️ Sebelumnya</button> <button data-template-id="btn-seterusnya" class="canva-button btn-bounce glossy px-6 py-3 rounded-full font-bold shadow" onclick="learnNext()" style="background: linear-gradient(135deg, rgb(167, 243, 208), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">Seterusnya ➡️</button>
     </div>
    </section><!-- PRACTICE -->
    <section id="page-practice" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="practice-title" class="canva-text text-xl font-bold" style="color: rgb(30, 64, 175); font-weight: 700; font-style: normal; font-size: 22px;">📝 Mod Latihan</h2><span id="practice-progress" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">1/10</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 data-template-id="practice-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(30, 64, 175); font-weight: 700; font-style: normal; font-size: 22px;">📝 Mod Latihan</h2><span id="practice-progress" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">1/10</span>
     </div>
     <div id="practice-area" class="bg-white rounded-3xl premium-shadow p-6 text-center">
-     <p id="practice-question" class="text-3xl font-extrabold mb-6"></p>
+     <p id="practice-question" class="text-4xl font-extrabold mb-6 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
      <div id="practice-choices" class="grid grid-cols-2 gap-3"></div>
      <p id="practice-feedback" class="mt-4 text-xl font-bold hidden"></p>
     </div>
@@ -212,18 +269,18 @@
       <p>🎯 Markah (%): <span id="p-res-pct" class="float-right text-blue-600"></span></p>
       <p>⏱️ Masa Diambil: <span id="p-res-time" class="float-right text-gray-700"></span></p>
      </div>
-     <div class="flex gap-2"><button class="btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow text-white bg-gradient-to-r from-blue-400 to-indigo-400" onclick="startPractice()">Main Semula</button> <button data-template-id="btn-cuba-lagi" class="canva-button btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow" onclick="goHome()" style="background: linear-gradient(135deg, rgb(196, 181, 253), rgb(167, 139, 250)); color: rgb(76, 29, 149); font-weight: 700; font-style: normal; font-size: 18px;">Kembali ke Menu</button>
+     <div class="flex gap-2">
+      <button class="btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow text-white bg-gradient-to-r from-blue-400 to-indigo-400" onclick="startPractice()">Main Semula</button> <button data-template-id="btn-cuba-lagi" class="canva-button btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow" onclick="goHome()" style="background: linear-gradient(135deg, rgb(196, 181, 253), rgb(167, 139, 250)); color: rgb(76, 29, 149); font-weight: 700; font-style: normal; font-size: 18px;">Kembali ke Menu</button>
      </div>
     </div>
    </section><!-- QUIZ -->
    <section id="page-quiz" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="quiz-title" class="canva-text text-xl font-bold" style="color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 22px;">⏱️ Mod Kuiz</h2><span id="quiz-timer" class="text-lg font-bold bg-red-100 text-red-600 px-3 py-1 rounded-full">60</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 data-template-id="quiz-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 22px;">⏱️ Mod Kuiz</h2><span id="quiz-timer" class="text-lg font-bold bg-red-100 text-red-600 px-3 py-1 rounded-full">60</span>
     </div>
     <div id="quiz-area" class="bg-white rounded-3xl premium-shadow p-6 text-center">
-     <p id="quiz-progress" class="text-sm text-gray-500 mb-2">1/20</p>
-     <p id="quiz-question" class="text-3xl font-extrabold mb-6"></p>
+     <p id="quiz-progress" class="text-sm text-white drop-shadow-lg" style="text-shadow: 0 1px 3px rgba(0,0,0,0.5)">1/20</p>
+     <p id="quiz-question" class="text-4xl font-extrabold mb-6 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
      <div id="quiz-choices" class="grid grid-cols-2 gap-3"></div>
     </div>
     <div id="quiz-result" class="hidden bg-white rounded-3xl premium-shadow p-8 text-center">
@@ -238,24 +295,22 @@
       <p>🎯 Markah (%): <span id="q-res-pct-val" class="float-right text-blue-600"></span></p>
       <p>⏱️ Masa Diambil: <span id="q-res-time-val" class="float-right text-gray-700"></span></p>
      </div>
-     <div class="flex gap-2"><button class="btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow text-white bg-gradient-to-r from-emerald-400 to-green-400" onclick="startQuiz()">Main Semula</button> <button data-template-id="btn-cuba-lagi-quiz" class="canva-button btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow" onclick="goHome()" style="background: linear-gradient(135deg, rgb(167, 243, 208), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">Kembali ke Menu</button>
+     <div class="flex gap-2">
+      <button class="btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow text-white bg-gradient-to-r from-emerald-400 to-green-400" onclick="startQuiz()">Main Semula</button> <button data-template-id="btn-cuba-lagi-quiz" class="canva-button btn-bounce glossy flex-1 py-3 rounded-full font-bold shadow" onclick="goHome()" style="background: linear-gradient(135deg, rgb(167, 243, 208), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">Kembali ke Menu</button>
      </div>
     </div>
    </section><!-- GAMES MENU -->
    <section id="page-games-menu" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="games-menu-title" class="canva-text text-xl font-bold" style="color: rgb(127, 29, 29); font-weight: 700; font-style: normal; font-size: 22px;">🎮 Pilih Permainan</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 data-template-id="games-menu-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(127, 29, 29); font-weight: 700; font-style: normal; font-size: 22px;">🎮 Pilih Permainan</h2>
      <div class="w-10"></div>
     </div>
-    <div class="grid grid-cols-2 gap-3">
-     <button data-template-id="btn-game-memory" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startGame()" style="background: linear-gradient(135deg, rgb(251, 207, 232), rgb(249, 168, 212)); color: rgb(131, 24, 67); font-weight: 700; font-style: normal; font-size: 18px;">🃏 Memory Match</button> <button data-template-id="btn-game-balloon" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startBalloonGame()" style="background: linear-gradient(135deg, rgb(186, 230, 253), rgb(125, 211, 252)); color: rgb(12, 74, 110); font-weight: 700; font-style: normal; font-size: 18px;">🎈 Pecahkan Belon</button> <button data-template-id="btn-game-rocket" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startRocketGame()" style="background: linear-gradient(135deg, rgb(199, 210, 254), rgb(165, 180, 252)); color: rgb(49, 46, 129); font-weight: 700; font-style: normal; font-size: 18px;">🚀 Tangkap Roket</button> <button data-template-id="btn-game-train" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startTrainGame()" style="background: linear-gradient(135deg, rgb(187, 247, 208), rgb(134, 239, 172)); color: rgb(20, 83, 45); font-weight: 700; font-style: normal; font-size: 18px;">🚂 Kereta Api</button> <button data-template-id="btn-game-wheel" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startWheelGame()" style="background: linear-gradient(135deg, rgb(254, 215, 170), rgb(253, 186, 116)); color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 18px;">🎡 Wheel of Sifir</button>
+    <div class="grid grid-cols-2 gap-3"><button data-template-id="btn-game-memory" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startGame()" style="background: linear-gradient(135deg, rgb(251, 207, 232), rgb(249, 168, 212)); color: rgb(131, 24, 67); font-weight: 700; font-style: normal; font-size: 18px;">🃏 Memory Match</button> <button data-template-id="btn-game-balloon" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startBalloonGame()" style="background: linear-gradient(135deg, rgb(186, 230, 253), rgb(125, 211, 252)); color: rgb(12, 74, 110); font-weight: 700; font-style: normal; font-size: 18px;">🎈 Pecahkan Belon</button> <button data-template-id="btn-game-rocket" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startRocketGame()" style="background: linear-gradient(135deg, rgb(199, 210, 254), rgb(165, 180, 252)); color: rgb(49, 46, 129); font-weight: 700; font-style: normal; font-size: 18px;">🚀 Tangkap Roket</button> <button data-template-id="btn-game-train" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startTrainGame()" style="background: linear-gradient(135deg, rgb(187, 247, 208), rgb(134, 239, 172)); color: rgb(20, 83, 45); font-weight: 700; font-style: normal; font-size: 18px;">🚂 Kereta Api</button> <button data-template-id="btn-game-wheel" class="canva-button btn-bounce glossy py-6 rounded-2xl font-bold premium-shadow text-center" onclick="startWheelGame()" style="background: linear-gradient(135deg, rgb(254, 215, 170), rgb(253, 186, 116)); color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 18px;">🎡 Wheel of Sifir</button>
     </div>
    </section><!-- GAME: Memory Match -->
    <section id="page-game" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="game-title" class="canva-text text-xl font-bold" style="color: rgb(127, 29, 29); font-weight: 700; font-style: normal; font-size: 22px;">🃏 Padankan Pasangan</h2><span id="game-moves" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 data-template-id="game-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(127, 29, 29); font-weight: 700; font-style: normal; font-size: 22px;">🃏 Padankan Pasangan</h2><span id="game-moves" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0</span>
     </div>
     <div id="game-board" class="grid grid-cols-4 gap-2"></div>
     <div id="game-complete" class="hidden text-center mt-6">
@@ -264,163 +319,171 @@
     </div>
    </section><!-- GAME: Balloon -->
    <section id="page-balloon" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 class="text-xl font-bold">🎈 Pecahkan Belon</h2><span id="balloon-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 class="text-xl font-bold text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)">🎈 Pecahkan Belon</h2><span id="balloon-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
     </div>
-    <p id="balloon-question" class="text-2xl font-extrabold text-center mb-3"></p>
+    <p id="balloon-question" class="text-4xl font-extrabold text-center mb-3 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
     <div id="balloon-area" class="relative w-full rounded-3xl bg-gradient-to-b from-sky-200 to-sky-400 overflow-hidden" style="height:320px"></div>
     <p id="balloon-feedback" class="text-center mt-3 text-lg font-bold hidden"></p>
    </section><!-- GAME: Rocket -->
    <section id="page-rocket" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 class="text-xl font-bold">🚀 Tangkap Roket</h2><span id="rocket-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 class="text-xl font-bold text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)">🚀 Tangkap Roket</h2><span id="rocket-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
     </div>
-    <p id="rocket-question" class="text-2xl font-extrabold text-center mb-3"></p>
+    <p id="rocket-question" class="text-4xl font-extrabold text-center mb-3 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
     <div id="rocket-area" class="relative w-full rounded-3xl bg-gradient-to-b from-indigo-900 to-purple-900 overflow-hidden" style="height:320px"></div>
     <p id="rocket-feedback" class="text-center mt-3 text-lg font-bold hidden"></p>
    </section><!-- GAME: Train -->
    <section id="page-train" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 class="text-xl font-bold">🚂 Kereta Api Sifir</h2><span id="train-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white rounded-full p-2.5 shadow-md hover:shadow-lg transition-shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px;color:#000;"></i></button>
+     <h2 class="text-xl font-bold text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)">🚂 Kereta Api Sifir</h2><span id="train-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
     </div>
-    <p id="train-question" class="text-2xl font-extrabold text-center mb-3"></p>
+    <p id="train-question" class="text-4xl font-extrabold text-center mb-3 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
     <div id="train-area" class="flex gap-2 overflow-x-auto py-4 px-2"></div>
     <p id="train-feedback" class="text-center mt-3 text-lg font-bold hidden"></p>
    </section><!-- GAME: Wheel -->
    <section id="page-wheel" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 class="text-xl font-bold">🎡 Wheel of Sifir</h2><span id="wheel-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showGamesMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 class="text-xl font-bold text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)">🎡 Wheel of Sifir</h2><span id="wheel-score" class="text-sm font-bold bg-white/80 px-3 py-1 rounded-full">0/5</span>
     </div>
     <div id="wheel-container" class="flex flex-col items-center">
-     <div id="wheel-display" class="w-48 h-48 rounded-full border-8 border-yellow-400 flex items-center justify-center text-4xl font-extrabold bg-gradient-to-br from-pink-200 to-purple-200 shadow-lg mb-4 premium-shadow">
+     <div id="wheel-display" class="w-48 h-48 rounded-full border-8 border-yellow-400 flex items-center justify-center text-4xl font-extrabold bg-gradient-to-br from-pink-200 to-purple-200 shadow-lg mb-4 premium-shadow text-white drop-shadow-lg" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5)">
       ?
      </div><button id="wheel-spin-btn" class="btn-bounce glossy px-8 py-3 rounded-full font-bold bg-gradient-to-r from-yellow-400 to-orange-400 text-white shadow-lg" onclick="spinWheel()">Putar! 🎡</button>
     </div>
     <div id="wheel-question-area" class="hidden mt-4 bg-white rounded-3xl premium-shadow p-6 text-center">
-     <p id="wheel-q" class="text-2xl font-extrabold mb-4"></p>
+     <p id="wheel-q" class="text-4xl font-extrabold mb-4 text-yellow-300 drop-shadow-lg" style="text-shadow: 0 2px 6px rgba(0,0,0,0.6)"></p>
      <div id="wheel-choices" class="grid grid-cols-2 gap-3"></div>
     </div>
    </section><!-- CARA MUDAH MENU -->
    <section id="page-cara-mudah-menu" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="cara-mudah-title" class="canva-text text-xl font-bold" style="color: rgb(120, 53, 15); font-weight: 700; font-style: normal; font-size: 22px;">💡 Cara Mudah Hafal Sifir</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="cara-mudah-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(120, 53, 15); font-weight: 700; font-style: normal; font-size: 22px;">💡 Cara Mudah Hafal Sifir</h2>
      <div class="w-10"></div>
     </div>
-    <div class="grid grid-cols-1 gap-3"><button data-template-id="btn-teknik-jari-9" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikJari9()" style="background: linear-gradient(135deg, rgb(251, 207, 232), rgb(244, 114, 182)); color: rgb(157, 23, 77);"> <span class="flex items-center gap-2">✋ <span>Teknik Jari Sifir 9</span></span> <i data-lucide="chevron-right" style="width:20px;height:20px"></i> </button> <button data-template-id="btn-teknik-sifir-2" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir2()" style="background: linear-gradient(135deg, rgb(219, 234, 254), rgb(147, 197, 253)); color: rgb(30, 58, 138); font-weight: 700; font-style: normal; font-size: 18px;">🖐️ Teknik Sifir 2 (Ganda Dua)</button> <button data-template-id="btn-teknik-sifir-5" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir5()" style="background: linear-gradient(135deg, rgb(209, 250, 229), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">✋ Teknik Sifir 5 (Corak 0 &amp; 5)</button> <button data-template-id="btn-teknik-sifir-10" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir10()" style="background: linear-gradient(135deg, rgb(254, 237, 222), rgb(253, 186, 116)); color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 18px;">🔟 Teknik Sifir 10 (Tambah Sifar)</button> <button data-template-id="btn-teknik-sifir-11" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir11()" style="background: linear-gradient(135deg, rgb(243, 232, 255), rgb(216, 180, 254)); color: rgb(88, 28, 135); font-weight: 700; font-style: normal; font-size: 18px;">👀 Teknik Sifir 11 (Gandakan Digit)</button>
+    <div class="grid grid-cols-1 gap-3">
+     <button data-template-id="btn-teknik-jari-9" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikJari9()" style="background: linear-gradient(135deg, rgb(251, 207, 232), rgb(244, 114, 182)); color: rgb(157, 23, 77);"> <span class="flex items-center gap-2">✋ <span>Teknik Jari Sifir 9</span></span> <i data-lucide="chevron-right" style="width:20px;height:20px"></i> </button> <button data-template-id="btn-teknik-sifir-2" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir2()" style="background: linear-gradient(135deg, rgb(219, 234, 254), rgb(147, 197, 253)); color: rgb(30, 58, 138); font-weight: 700; font-style: normal; font-size: 18px;">🖐️ Teknik Sifir 2 (Ganda Dua)</button> <button data-template-id="btn-teknik-sifir-5" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir5()" style="background: linear-gradient(135deg, rgb(209, 250, 229), rgb(110, 231, 183)); color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 18px;">✋ Teknik Sifir 5 (Corak 0 &amp; 5)</button> <button data-template-id="btn-teknik-sifir-10" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir10()" style="background: linear-gradient(135deg, rgb(254, 237, 222), rgb(253, 186, 116)); color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 18px;">🔟 Teknik Sifir 10 (Tambah Sifar)</button> <button data-template-id="btn-teknik-sifir-11" class="canva-button btn-bounce glossy py-5 px-4 rounded-2xl font-bold premium-shadow flex items-center justify-between" onclick="showTeknikSifir11()" style="background: linear-gradient(135deg, rgb(243, 232, 255), rgb(216, 180, 254)); color: rgb(88, 28, 135); font-weight: 700; font-style: normal; font-size: 18px;">👀 Teknik Sifir 11 (Gandakan Digit)</button>
     </div>
    </section><!-- TEKNIK SIFIR 2 -->
    <section id="page-teknik-sifir-2" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="teknik-sifir-2-title" class="canva-text text-xl font-bold" style="color: rgb(30, 58, 138); font-weight: 700; font-style: normal; font-size: 22px;">🖐️ Teknik Sifir 2 (Ganda Dua)</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="teknik-sifir-2-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(30, 58, 138); font-weight: 700; font-style: normal; font-size: 22px;">🖐️ Teknik Sifir 2 (Ganda Dua)</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center">
-     <div class="grid grid-cols-5 gap-2 mb-4"><button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(1)">2×1</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(2)">2×2</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(3)">2×3</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(4)">2×4</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(5)">2×5</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(6)">2×6</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(7)">2×7</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(8)">2×8</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(9)">2×9</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(10)">2×10</button>
+     <div class="grid grid-cols-5 gap-2 mb-4">
+      <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(1)">2×1</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(2)">2×2</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(3)">2×3</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(4)">2×4</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(5)">2×5</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(6)">2×6</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(7)">2×7</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(8)">2×8</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(9)">2×9</button> <button class="sifir2-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-blue-200 text-blue-800 bg-white" onclick="selectSifir2Multiplier(10)">2×10</button>
      </div>
-     <div id="sifir2-visual" class="p-4 bg-blue-50/60 rounded-2xl border border-blue-100 min-h-[100px] flex items-center justify-center gap-4 text-3xl"><!-- Generated visually -->
+     <div id="sifir2-visual" class="p-4 bg-blue-50/60 rounded-2xl border border-blue-100 min-h-[100px] flex items-center justify-center gap-4 text-3xl">
+      <!-- Generated visually -->
      </div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 flex flex-col gap-4">
-     <div class="flex justify-between items-center border-b pb-3 border-gray-100"><span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir2-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir2Challenge()">🎯 Cuba Sendiri</button>
+     <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir2-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir2Challenge()">🎯 Cuba Sendiri</button>
      </div>
-     <div id="sifir2-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center"><!-- Generated Description -->
+     <div id="sifir2-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center">
+      <!-- Generated Description -->
      </div>
-     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50"><button class="btn-bounce px-4 py-2 bg-blue-100 text-blue-800 font-bold rounded-full text-xs shadow hover:bg-blue-200" onclick="prevSifir2Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-blue-500 text-white font-bold rounded-full text-xs shadow hover:bg-blue-600" onclick="nextSifir2Multiplier()">Seterusnya ➡️</button>
+     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
+      <button class="btn-bounce px-4 py-2 bg-blue-100 text-blue-800 font-bold rounded-full text-xs shadow hover:bg-blue-200" onclick="prevSifir2Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-blue-500 text-white font-bold rounded-full text-xs shadow hover:bg-blue-600" onclick="nextSifir2Multiplier()">Seterusnya ➡️</button>
      </div>
     </div>
    </section><!-- TEKNIK SIFIR 5 -->
    <section id="page-teknik-sifir-5" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="teknik-sifir-5-title" class="canva-text text-xl font-bold" style="color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 22px;">✋ Teknik Sifir 5 (Corak 0 &amp; 5)</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="teknik-sifir-5-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(6, 95, 70); font-weight: 700; font-style: normal; font-size: 22px;">✋ Teknik Sifir 5 (Corak 0 &amp; 5)</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center">
-     <div class="grid grid-cols-5 gap-2 mb-4"><button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(1)">5×1</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(2)">5×2</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(3)">5×3</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(4)">5×4</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(5)">5×5</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(6)">5×6</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(7)">5×7</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(8)">5×8</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(9)">5×9</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(10)">5×10</button>
+     <div class="grid grid-cols-5 gap-2 mb-4">
+      <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(1)">5×1</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(2)">5×2</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(3)">5×3</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(4)">5×4</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(5)">5×5</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(6)">5×6</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(7)">5×7</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(8)">5×8</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(9)">5×9</button> <button class="sifir5-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-emerald-200 text-emerald-800 bg-white" onclick="selectSifir5Multiplier(10)">5×10</button>
      </div>
-     <div id="sifir5-visual" class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100 min-h-[100px] flex flex-col items-center justify-center gap-1 text-lg"><!-- Generated visually -->
+     <div id="sifir5-visual" class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100 min-h-[100px] flex flex-col items-center justify-center gap-1 text-lg">
+      <!-- Generated visually -->
      </div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 flex flex-col gap-4">
-     <div class="flex justify-between items-center border-b pb-3 border-gray-100"><span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir5-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir5Challenge()">🎯 Cuba Sendiri</button>
+     <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir5-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir5Challenge()">🎯 Cuba Sendiri</button>
      </div>
-     <div id="sifir5-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center"><!-- Generated Description -->
+     <div id="sifir5-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center">
+      <!-- Generated Description -->
      </div>
-     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50"><button class="btn-bounce px-4 py-2 bg-emerald-100 text-emerald-800 font-bold rounded-full text-xs shadow hover:bg-emerald-200" onclick="prevSifir5Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-emerald-500 text-white font-bold rounded-full text-xs shadow hover:bg-emerald-600" onclick="nextSifir5Multiplier()">Seterusnya ➡️</button>
+     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
+      <button class="btn-bounce px-4 py-2 bg-emerald-100 text-emerald-800 font-bold rounded-full text-xs shadow hover:bg-emerald-200" onclick="prevSifir5Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-emerald-500 text-white font-bold rounded-full text-xs shadow hover:bg-emerald-600" onclick="nextSifir5Multiplier()">Seterusnya ➡️</button>
      </div>
     </div>
    </section><!-- TEKNIK SIFIR 10 -->
    <section id="page-teknik-sifir-10" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="teknik-sifir-10-title" class="canva-text text-xl font-bold" style="color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 22px;">🔟 Teknik Sifir 10 (Tambah Sifar)</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="teknik-sifir-10-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(124, 45, 18); font-weight: 700; font-style: normal; font-size: 22px;">🔟 Teknik Sifir 10 (Tambah Sifar)</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center">
-     <div class="grid grid-cols-5 gap-2 mb-4"><button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(1)">10×1</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(2)">10×2</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(3)">10×3</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(4)">10×4</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(5)">10×5</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(6)">10×6</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(7)">10×7</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(8)">10×8</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(9)">10×9</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(10)">10×10</button>
+     <div class="grid grid-cols-5 gap-2 mb-4">
+      <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(1)">10×1</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(2)">10×2</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(3)">10×3</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(4)">10×4</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(5)">10×5</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(6)">10×6</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(7)">10×7</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(8)">10×8</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(9)">10×9</button> <button class="sifir10-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-orange-200 text-orange-800 bg-white" onclick="selectSifir10Multiplier(10)">10×10</button>
      </div>
-     <div id="sifir10-visual" class="p-4 bg-orange-50/60 rounded-2xl border border-orange-100 min-h-[100px] flex items-center justify-center gap-2 text-2xl"><!-- Animated Visual -->
+     <div id="sifir10-visual" class="p-4 bg-orange-50/60 rounded-2xl border border-orange-100 min-h-[100px] flex items-center justify-center gap-2 text-2xl">
+      <!-- Animated Visual -->
      </div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 flex flex-col gap-4">
-     <div class="flex justify-between items-center border-b pb-3 border-gray-100"><span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir10-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir10Challenge()">🎯 Cuba Sendiri</button>
+     <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir10-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir10Challenge()">🎯 Cuba Sendiri</button>
      </div>
-     <div id="sifir10-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center"><!-- Generated Description -->
+     <div id="sifir10-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center">
+      <!-- Generated Description -->
      </div>
-     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50"><button class="btn-bounce px-4 py-2 bg-orange-100 text-orange-800 font-bold rounded-full text-xs shadow hover:bg-orange-200" onclick="prevSifir10Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-orange-500 text-white font-bold rounded-full text-xs shadow hover:bg-orange-600" onclick="nextSifir10Multiplier()">Seterusnya ➡️</button>
+     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
+      <button class="btn-bounce px-4 py-2 bg-orange-100 text-orange-800 font-bold rounded-full text-xs shadow hover:bg-orange-200" onclick="prevSifir10Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-orange-500 text-white font-bold rounded-full text-xs shadow hover:bg-orange-600" onclick="nextSifir10Multiplier()">Seterusnya ➡️</button>
      </div>
     </div>
    </section><!-- TEKNIK SIFIR 11 -->
    <section id="page-teknik-sifir-11" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="teknik-sifir-11-title" class="canva-text text-xl font-bold" style="color: rgb(88, 28, 135); font-weight: 700; font-style: normal; font-size: 22px;">👀 Teknik Sifir 11 (Gandakan Digit)</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="teknik-sifir-11-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(88, 28, 135); font-weight: 700; font-style: normal; font-size: 22px;">👀 Teknik Sifir 11 (Gandakan Digit)</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center">
-     <div class="grid grid-cols-5 gap-2 mb-4"><button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(1)">11×1</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(2)">11×2</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(3)">11×3</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(4)">11×4</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(5)">11×5</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(6)">11×6</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(7)">11×7</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(8)">11×8</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(9)">11×9</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(10)">11×10</button>
+     <div class="grid grid-cols-5 gap-2 mb-4">
+      <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(1)">11×1</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(2)">11×2</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(3)">11×3</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(4)">11×4</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(5)">11×5</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(6)">11×6</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(7)">11×7</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(8)">11×8</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(9)">11×9</button> <button class="sifir11-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-purple-200 text-purple-800 bg-white" onclick="selectSifir11Multiplier(10)">11×10</button>
      </div>
-     <div id="sifir11-visual" class="p-4 bg-purple-50/60 rounded-2xl border border-purple-100 min-h-[100px] flex items-center justify-center gap-4 text-3xl"><!-- Generated visually -->
+     <div id="sifir11-visual" class="p-4 bg-purple-50/60 rounded-2xl border border-purple-100 min-h-[100px] flex items-center justify-center gap-4 text-3xl">
+      <!-- Generated visually -->
      </div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 flex flex-col gap-4">
-     <div class="flex justify-between items-center border-b pb-3 border-gray-100"><span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir11-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir11Challenge()">🎯 Cuba Sendiri</button>
+     <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-sifir11-challenge" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleSifir11Challenge()">🎯 Cuba Sendiri</button>
      </div>
-     <div id="sifir11-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center"><!-- Generated Description -->
+     <div id="sifir11-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[120px] flex flex-col justify-center">
+      <!-- Generated Description -->
      </div>
-     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50"><button class="btn-bounce px-4 py-2 bg-purple-100 text-purple-800 font-bold rounded-full text-xs shadow hover:bg-purple-200" onclick="prevSifir11Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-purple-500 text-white font-bold rounded-full text-xs shadow hover:bg-purple-600" onclick="nextSifir11Multiplier()">Seterusnya ➡️</button>
+     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
+      <button class="btn-bounce px-4 py-2 bg-purple-100 text-purple-800 font-bold rounded-full text-xs shadow hover:bg-purple-200" onclick="prevSifir11Multiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-purple-500 text-white font-bold rounded-full text-xs shadow hover:bg-purple-600" onclick="nextSifir11Multiplier()">Seterusnya ➡️</button>
      </div>
     </div>
    </section><!-- TEKNIK JARI SIFIR 9 -->
    <section id="page-teknik-jari-9" class="hidden slide-up">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="teknik-jari-title" class="canva-text text-xl font-bold" style="color: rgb(157, 23, 77); font-weight: 700; font-style: normal; font-size: 22px;">✋ Teknik Jari Sifir 9</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="showCaraMudahMenu()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="teknik-jari-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(157, 23, 77); font-weight: 700; font-style: normal; font-size: 22px;">✋ Teknik Jari Sifir 9</h2>
      <div class="w-10"></div>
     </div>
-    <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center">
-     <!-- Interactive Sifir Buttons 9x1 to 9x10 -->
-     <div class="grid grid-cols-5 gap-2 mb-6"><button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(1)">9×1</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(2)">9×2</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(3)">9×3</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(4)">9×4</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(5)">9×5</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(6)">9×6</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(7)">9×7</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(8)">9×8</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(9)">9×9</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(10)">9×10</button>
+    <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 text-center"><!-- Interactive Sifir Buttons 9x1 to 9x10 -->
+     <div class="grid grid-cols-5 gap-2 mb-6">
+      <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(1)">9×1</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(2)">9×2</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(3)">9×3</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(4)">9×4</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(5)">9×5</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(6)">9×6</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(7)">9×7</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(8)">9×8</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(9)">9×9</button> <button class="finger-sifir-btn btn-bounce py-2 px-1 rounded-xl text-xs font-bold border-2 border-pink-200 text-pink-800 bg-white" onclick="selectFingerMultiplier(10)">9×10</button>
      </div>
-     <div class="flex justify-center gap-6 mb-6 pt-2">
-      <!-- Left Cartoon Hand -->
+     <div class="flex justify-center gap-6 mb-6 pt-2"><!-- Left Cartoon Hand -->
       <div class="hand-container flex flex-col justify-end" id="left-hand-box">
-       <div class="flex gap-2 items-end justify-center h-20 w-full px-2">
-        <button id="finger-1" onclick="handleFingerClick(1)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 48px;" title="Jari 1"></button> <button id="finger-2" onclick="handleFingerClick(2)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 62px;" title="Jari 2"></button> <button id="finger-3" onclick="handleFingerClick(3)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 68px;" title="Jari 3"></button> <button id="finger-4" onclick="handleFingerClick(4)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 58px;" title="Jari 4"></button> <button id="finger-5" onclick="handleFingerClick(5)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 44px;" title="Jari 5"></button>
+       <div class="flex gap-2 items-end justify-center h-20 w-full px-2"><button id="finger-1" onclick="handleFingerClick(1)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 48px;" title="Jari 1"></button> <button id="finger-2" onclick="handleFingerClick(2)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 62px;" title="Jari 2"></button> <button id="finger-3" onclick="handleFingerClick(3)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 68px;" title="Jari 3"></button> <button id="finger-4" onclick="handleFingerClick(4)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 58px;" title="Jari 4"></button> <button id="finger-5" onclick="handleFingerClick(5)" class="finger w-4 bg-pink-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 44px;" title="Jari 5"></button>
        </div>
        <div class="text-xs font-black text-pink-700 mt-1 pb-1">
         Tangan Kiri
        </div>
       </div><!-- Right Cartoon Hand -->
       <div class="hand-container flex flex-col justify-end" id="right-hand-box">
-       <div class="flex gap-2 items-end justify-center h-20 w-full px-2">
-        <button id="finger-6" onclick="handleFingerClick(6)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 44px;" title="Jari 6"></button> <button id="finger-7" onclick="handleFingerClick(7)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 58px;" title="Jari 7"></button> <button id="finger-8" onclick="handleFingerClick(8)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 68px;" title="Jari 8"></button> <button id="finger-9" onclick="handleFingerClick(9)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 62px;" title="Jari 9"></button> <button id="finger-10" onclick="handleFingerClick(10)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 48px;" title="Jari 10"></button>
+       <div class="flex gap-2 items-end justify-center h-20 w-full px-2"><button id="finger-6" onclick="handleFingerClick(6)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 44px;" title="Jari 6"></button> <button id="finger-7" onclick="handleFingerClick(7)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 58px;" title="Jari 7"></button> <button id="finger-8" onclick="handleFingerClick(8)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 68px;" title="Jari 8"></button> <button id="finger-9" onclick="handleFingerClick(9)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 62px;" title="Jari 9"></button> <button id="finger-10" onclick="handleFingerClick(10)" class="finger w-4 bg-purple-400 rounded-t-full focus:outline-none cursor-pointer" style="height: 48px;" title="Jari 10"></button>
        </div>
        <div class="text-xs font-black text-purple-700 mt-1 pb-1">
         Tangan Kanan
@@ -429,21 +492,17 @@
      </div>
     </div><!-- Try Yourself Mode Section & Help Description -->
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4 flex flex-col gap-4">
-     <div class="flex justify-between items-center border-b pb-3 border-gray-100">
-      <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-cuba-sendiri" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleCubaSendiriMode()">🎯 Cuba Sendiri</button>
+     <div class="flex justify-between items-center border-b pb-3 border-gray-100"><span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Penerangan Teknik</span> <button id="btn-cuba-sendiri" class="btn-bounce px-4 py-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-extrabold rounded-full text-xs shadow-md" onclick="toggleCubaSendiriMode()">🎯 Cuba Sendiri</button>
      </div>
-     <div id="finger-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[140px] flex flex-col justify-center">
-      <!-- Generated Description Here -->
+     <div id="finger-steps" class="text-left font-medium text-gray-700 space-y-2 min-h-[140px] flex flex-col justify-center"><!-- Generated Description Here -->
      </div>
-     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50">
-      <button class="btn-bounce px-4 py-2 bg-pink-100 text-pink-800 font-bold rounded-full text-xs shadow hover:bg-pink-200" onclick="prevFingerMultiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-pink-500 text-white font-bold rounded-full text-xs shadow hover:bg-pink-600" onclick="nextFingerMultiplier()">Seterusnya ➡️</button>
+     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-50"><button class="btn-bounce px-4 py-2 bg-pink-100 text-pink-800 font-bold rounded-full text-xs shadow hover:bg-pink-200" onclick="prevFingerMultiplier()">⬅️ Sebelumnya</button> <button class="btn-bounce px-4 py-2 bg-pink-500 text-white font-bold rounded-full text-xs shadow hover:bg-pink-600" onclick="nextFingerMultiplier()">Seterusnya ➡️</button>
      </div>
     </div>
    </section><!-- STATS -->
    <section id="page-stats" class="hidden">
-    <div class="flex items-center justify-between mb-4">
-     <button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
-     <h2 data-template-id="stats-title" class="canva-text text-xl font-bold" style="color: rgb(76, 29, 149); font-weight: 700; font-style: normal; font-size: 22px;">📊 Prestasi Saya</h2>
+    <div class="flex items-center justify-between mb-4"><button class="btn-bounce bg-white/80 rounded-full p-2 shadow" onclick="goHome()"><i data-lucide="arrow-left" style="width:24px;height:24px"></i></button>
+     <h2 data-template-id="stats-title" class="canva-text text-xl font-bold text-white drop-shadow-lg" style="text-shadow: rgba(0, 0, 0, 0.5) 0px 2px 4px; color: rgb(76, 29, 149); font-weight: 700; font-style: normal; font-size: 22px;">📊 Prestasi Saya</h2>
      <div class="w-10"></div>
     </div>
     <div class="bg-white rounded-3xl premium-shadow p-5 mb-4">
@@ -460,12 +519,13 @@
     <div id="stats-suggestion" class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 text-center font-medium text-yellow-800"></div>
    </section>
   </main>
-  <script src="/_sdk/c939c145c3c74230.editing_sdk.js" integrity="sha512-jh2pv/gl9Gzzn5dxfzwQO4wkqtnAQIim+LIUDYfVu2cdqPkQV2MqbjsDUW5IYbrSZFjRlOBrIWzlvWDXQYxOjg=="></script>
+  <script src="/_sdk/0a2c59aba90bafcf.editing_sdk.js" integrity="sha512-oJ0eVi6NgEzXGPCIPXJiGxB6ZRyIzQ1VF+WywtAc5NXBkRu8KT/0qsMQvecuVbkhSpdfToUqXoPwRVBZaa+Xxw=="></script>
   <script>
 // ===== MULTI-STUDENT STATE =====
 let currentStudentId = localStorage.getItem('jhs_current_student_id') || '';
 let studentName = '';
 let studentYear = '';
+let studentProfilePic = '';
 let stars = 0;
 let badges = [];
 let stats = {};
@@ -501,6 +561,7 @@ function loadActiveProfileData() {
     if (profile) {
         studentName = profile.name || '';
         studentYear = profile.year || '';
+        studentProfilePic = profilePictureCache[currentStudentId] || '';
         stars = parseInt(profile.stars || '0');
         badges = profile.badges || [];
         stats = profile.stats || {};
@@ -512,6 +573,24 @@ function loadActiveProfileData() {
         if(!stats.lastDay) stats.lastDay='';
         if(!stats.totalTime) stats.totalTime=0;
         for(let i=1;i<=12;i++){if(!stats['s'+i])stats['s'+i]={correct:0,total:0};}
+        
+        // Ensure all sifir entries are properly initialized
+        ensureStatsStructure();
+    }
+}
+
+function ensureStatsStructure() {
+    if(!stats.practiceCount) stats.practiceCount=0;
+    if(!stats.quizCount) stats.quizCount=0;
+    if(!stats.streak) stats.streak=0;
+    if(!stats.lastDay) stats.lastDay='';
+    if(!stats.totalTime) stats.totalTime=0;
+    for(let i=1;i<=12;i++){
+        if(!stats['s'+i]) {
+            stats['s'+i]={correct:0,total:0};
+        } else if(typeof stats['s'+i].correct === 'undefined' || typeof stats['s'+i].total === 'undefined') {
+            stats['s'+i]={correct:0,total:0};
+        }
     }
 }
 
@@ -716,6 +795,7 @@ function saveStudentName(e) {
         
         studentName = nameInput;
         studentYear = 'Prasekolah'; // Default initial year
+        studentProfilePic = ''; // No profile pic initially
         stars = 0;
         badges = [];
         stats = {};
@@ -770,7 +850,18 @@ function updateStudentUIParts() {
         else if (studentYear.includes('5')) emoji = '📔';
         else if (studentYear.includes('6')) emoji = '📒';
         
-        document.getElementById('header-student-year').textContent = `${emoji} ${studentYear} ⚙️`;
+        document.getElementById('year-display').textContent = studentYear;
+    }
+    // Update avatar display
+    const avatarImg = document.getElementById('avatar-image');
+    const avatarIcon = document.getElementById('avatar-icon');
+    if (studentProfilePic) {
+        avatarImg.src = studentProfilePic;
+        avatarImg.style.display = 'block';
+        avatarIcon.style.display = 'none';
+    } else {
+        avatarImg.style.display = 'none';
+        avatarIcon.style.display = 'block';
     }
 }
 
@@ -872,6 +963,207 @@ let practiceQuestions=[],practiceIdx=0,practiceScore=0,practiceWrongAttempts=0;
 let quizQuestions=[],quizIdx=0,quizScore=0,quizTimer=null,quizTimeLeft=60;
 let gameCards=[],gameFlipped=[],gameMatched=0,gameMoves=0,gameLocked=false;
 
+// ===== CARA MUDAH SIFIR & TEKNIK JARI STATES - DECLARE BEFORE USE =====
+let currentFingerMultiplier = 1;
+let cubaSendiriMode = false;
+let currentChallengeNum = 1;
+let currentSifir2Multiplier = 1;
+let sifir2ChallengeMode = false;
+let currentSifir2Challenge = 1;
+let currentSifir5Multiplier = 1;
+let sifir5ChallengeMode = false;
+let currentSifir5Challenge = 1;
+let currentSifir10Multiplier = 1;
+let sifir10ChallengeMode = false;
+let currentSifir10Challenge = 1;
+let currentSifir11Multiplier = 1;
+let sifir11ChallengeMode = false;
+let currentSifir11Challenge = 1;
+
+// ===== GAME STATES - DECLARE BEFORE USE =====
+let balloonState={score:0,qIdx:0,questions:[],interval:null};
+let rocketState={score:0,qIdx:0,questions:[],timeoutId:null};
+let trainState={score:0,qIdx:0,questions:[]};
+let wheelState={score:0,qIdx:0,questions:[],sifir:0};
+
+// ===== GLOBAL AUDIO CONTEXT & SOUND EFFECTS =====
+let globalAudioCtx = null;
+
+function getAudioContext() {
+    if (!globalAudioCtx) {
+        globalAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (globalAudioCtx.state === 'suspended') {
+        globalAudioCtx.resume();
+    }
+    return globalAudioCtx;
+}
+
+const gameSounds = {
+    flip() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(300, now + 0.15);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            osc.start(now); osc.stop(now + 0.15);
+        } catch(e){}
+    },
+    match() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc1 = ctx.createOscillator();
+            const osc2 = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc1.connect(gain); osc2.connect(gain); gain.connect(ctx.destination);
+            osc1.type = 'sine'; osc2.type = 'sine';
+            osc1.frequency.setValueAtTime(523.25, now);
+            osc1.frequency.setValueAtTime(659.25, now + 0.1);
+            osc2.frequency.setValueAtTime(783.99, now + 0.1);
+            osc2.frequency.setValueAtTime(1046.50, now + 0.2);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+            osc1.start(now); osc2.start(now);
+            osc1.stop(now + 0.35); osc2.stop(now + 0.35);
+        } catch(e){}
+    },
+    wrong() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.linearRampToValueAtTime(110, now + 0.3);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            osc.start(now); osc.stop(now + 0.3);
+        } catch(e){}
+    },
+    victory() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const notes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
+            notes.forEach((freq, index) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain); gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + index * 0.08);
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.15, now + index * 0.08 + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + index * 0.08 + 0.25);
+                osc.start(now + index * 0.08);
+                osc.stop(now + index * 0.08 + 0.25);
+            });
+        } catch(e){}
+    },
+    pop() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(100, now + 0.08);
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+            osc.start(now); osc.stop(now + 0.08);
+        } catch(e){}
+    },
+    whoosh() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const bufferSize = ctx.sampleRate * 0.4;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(200, now);
+            filter.frequency.exponentialRampToValueAtTime(1200, now + 0.3);
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+            noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+            noise.start(now); noise.stop(now + 0.4);
+        } catch(e){}
+    },
+    chooChoo() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc1 = ctx.createOscillator();
+            const gain1 = ctx.createGain();
+            osc1.connect(gain1); gain1.connect(ctx.destination);
+            osc1.type = 'sawtooth';
+            osc1.frequency.setValueAtTime(80, now);
+            gain1.gain.setValueAtTime(0.15, now);
+            gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            osc1.start(now); osc1.stop(now + 0.15);
+            const osc2 = ctx.createOscillator();
+            const gain2 = ctx.createGain();
+            osc2.connect(gain2); gain2.connect(ctx.destination);
+            osc2.type = 'sawtooth';
+            osc2.frequency.setValueAtTime(110, now + 0.15);
+            gain2.gain.setValueAtTime(0, now);
+            gain2.gain.linearRampToValueAtTime(0.12, now + 0.15);
+            gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            osc2.start(now + 0.15); osc2.stop(now + 0.3);
+        } catch(e){}
+    },
+    wheelSpin() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(300, now);
+            for (let i = 0; i < 20; i++) {
+                osc.frequency.setValueAtTime(200 + (i % 2) * 200, now + i * 0.1);
+            }
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.setValueAtTime(0.1, now + 1.8);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 2.0);
+            osc.start(now); osc.stop(now + 2.0);
+        } catch(e){}
+    },
+    wheelStop() {
+        try {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.exponentialRampToValueAtTime(150, now + 0.25);
+            gain.gain.setValueAtTime(0.2, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            osc.start(now); osc.stop(now + 0.25);
+        } catch(e){}
+    }
+};
+
 function getLevel(){return Math.min(100,Math.floor(stars/10)+1);}
 function saveStats(){
     saveActiveProfileData();
@@ -883,6 +1175,49 @@ function updateHeader(){
 }
 updateHeader(); renderBadges(); updateStreak(); buildSifirGrid(); initWelcome();
 
+// ===== PROFILE PICTURE UPLOAD FUNCTIONS =====
+// Store profile pictures in memory (sessionStorage) to avoid localStorage quota issues
+const profilePictureCache = {};
+
+function openProfilePicModal() {
+    document.getElementById('modal-change-profile-pic').classList.remove('hidden');
+}
+
+function closeProfilePicModal() {
+    document.getElementById('modal-change-profile-pic').classList.add('hidden');
+}
+
+function triggerProfilePictureUpload() {
+    document.getElementById('profile-pic-input').click();
+}
+
+function handleProfilePictureSelected(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Validate file size (limit to 500KB to be safe)
+        if (file.size > 500000) {
+            alert('Gambar terlalu besar. Sila pilih gambar kurang daripada 500KB.');
+            event.target.value = '';
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const base64Data = e.target.result;
+            // Store in memory cache instead of localStorage
+            profilePictureCache[currentStudentId] = base64Data;
+            studentProfilePic = base64Data;
+            updateStudentUIParts();
+            closeProfilePicModal();
+            // Reset file input
+            event.target.value = '';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// ===== END PROFILE PICTURE UPLOAD FUNCTIONS =====
+
 function updateStreak(){
     const today=new Date().toISOString().slice(0,10);
     if(stats.lastDay===today)return;
@@ -891,13 +1226,17 @@ function updateStreak(){
     stats.lastDay=today; saveStats();
 }
 
-function buildSifirGrid(){
+function showSifirList() {
+    showPage('page-sifir-list');
     const colors=['from-pink-300 to-rose-400','from-blue-300 to-indigo-400','from-green-300 to-emerald-400','from-yellow-300 to-amber-400','from-purple-300 to-violet-400','from-red-300 to-rose-400','from-teal-300 to-cyan-400','from-orange-300 to-amber-400','from-indigo-300 to-blue-400','from-lime-300 to-green-400','from-cyan-300 to-sky-400','from-rose-300 to-pink-400'];
     let h='';
     for(let i=1;i<=12;i++){
-        h+=`<button class="btn-bounce glossy rounded-2xl w-full aspect-square text-xl font-extrabold text-white bg-gradient-to-br ${colors[i-1]} shadow-lg" onclick="openLearn(${i})">${i}</button>`;
+        h+=`<button class="btn-bounce glossy rounded-2xl w-full aspect-square text-xl font-extrabold text-white bg-gradient-to-br ${colors[i-1]} shadow-lg flex flex-col items-center justify-center gap-1" onclick="openLearn(${i})"><span class="text-xs opacity-85 font-medium">Sifir</span><span class="text-3xl font-black">${i}</span></button>`;
     }
-    document.getElementById('sifir-grid').innerHTML=h;
+    document.getElementById('sifir-buttons-container').innerHTML=h;
+}
+
+function buildSifirGrid(){
     buildSetupSifirGrids();
 }
 
@@ -973,8 +1312,8 @@ function finishPractice() {
     document.getElementById('p-res-pct').textContent = `${pct}%`;
     document.getElementById('p-res-time').textContent = durationStr;
 
-    // Save active profile stats explicitly
-    saveStats();
+    // Save active profile stats explicitly - MUST happen before confetti/badge checks
+    saveActiveProfileData();
 
     // Generate evaluation stars
     let ratingStars = '';
@@ -1067,7 +1406,7 @@ function checkQuiz(chosen,correct,a,b){
 }
 function finishQuiz(){
     stats.quizCount++;
-    saveStats();
+    saveActiveProfileData();
     if(quizTimer){clearInterval(quizTimer);quizTimer=null;}
     
     const timeSpent = Math.round((new Date() - sessionStartTime) / 1000);
@@ -1133,6 +1472,7 @@ function flipCard(idx){
                 if(gameMatched===6){
                     gameSounds.victory();
                     fireConfetti();
+                    saveActiveProfileData();
                     document.getElementById('game-complete').classList.remove('hidden');
                     checkBadge();
                 } else {
@@ -1152,7 +1492,6 @@ function flipCard(idx){
 }
 
 // GAME: Balloon
-let balloonState={score:0,qIdx:0,questions:[],interval:null};
 function startBalloonGame(){
     if (!currentStudentId || !studentName) {
         loadActiveProfileData();
@@ -1198,11 +1537,11 @@ function checkBalloon(chosen,correct,a,b){
 function endBalloonGame(){
     gameSounds.victory();
     document.getElementById('balloon-area').innerHTML=`<div class="flex flex-col items-center justify-center h-full"><p class="text-5xl">🎈</p><p class="text-xl font-bold mt-2">Skor: ${balloonState.score}/5</p><button class="btn-bounce glossy mt-3 px-6 py-2 rounded-full font-bold bg-gradient-to-r from-pink-400 to-rose-400 text-white shadow" onclick="showGamesMenu()">Kembali</button></div>`;
+    saveActiveProfileData();
     checkBadge();
 }
 
 // GAME: Rocket
-let rocketState={score:0,qIdx:0,questions:[],timeoutId:null};
 function startRocketGame(){
     if (!currentStudentId || !studentName) {
         loadActiveProfileData();
@@ -1269,11 +1608,11 @@ function checkRocket(chosen,correct,a,b){
 function endRocketGame(){
     if(rocketState.timeoutId) { clearTimeout(rocketState.timeoutId); }
     document.getElementById('rocket-area').innerHTML=`<div class="flex flex-col items-center justify-center h-full gap-3"><p class="text-5xl">🚀</p><p class="text-xl font-bold text-white">Skor: ${rocketState.score}/5</p><div class="flex flex-col gap-2 w-48"><button class="btn-bounce glossy px-6 py-2.5 rounded-full font-bold bg-gradient-to-r from-green-400 to-emerald-500 text-white shadow-lg" onclick="startRocketGame()">Main Semula 🔄</button><button class="btn-bounce glossy px-6 py-2.5 rounded-full font-bold bg-gradient-to-r from-indigo-400 to-purple-400 text-white shadow" onclick="showGamesMenu()">Kembali</button></div></div>`;
+    saveActiveProfileData();
     checkBadge();
 }
 
 // GAME: Train
-let trainState={score:0,qIdx:0,questions:[]};
 function startTrainGame(){
     if (!currentStudentId || !studentName) {
         loadActiveProfileData();
@@ -1315,11 +1654,11 @@ function checkTrain(chosen,correct,a,b){
 function endTrainGame(){
     gameSounds.victory();
     document.getElementById('train-area').innerHTML=`<div class="flex flex-col items-center w-full py-6"><p class="text-5xl">🚂</p><p class="text-xl font-bold mt-2">Skor: ${trainState.score}/5</p><button class="btn-bounce glossy mt-3 px-6 py-2 rounded-full font-bold bg-gradient-to-r from-green-400 to-teal-400 text-white shadow" onclick="showGamesMenu()">Kembali</button></div>`;
+    saveActiveProfileData();
     checkBadge();
 }
 
 // GAME: Wheel
-let wheelState={score:0,qIdx:0,questions:[],sifir:0};
 function startWheelGame(){
     if (!currentStudentId || !studentName) {
         loadActiveProfileData();
@@ -1387,6 +1726,7 @@ function checkWheel(chosen,correct,a,b){
 function endWheelGame(){
     gameSounds.victory();
     document.getElementById('wheel-question-area').innerHTML=`<p class="text-5xl">🎡</p><p class="text-xl font-bold mt-2">Skor: ${wheelState.score}/5</p><button class="btn-bounce glossy mt-3 px-6 py-2 rounded-full font-bold bg-gradient-to-r from-yellow-400 to-orange-400 text-white shadow" onclick="showGamesMenu()">Kembali</button>`;
+    saveActiveProfileData();
     checkBadge();
 }
 
@@ -1394,6 +1734,10 @@ function endWheelGame(){
 function showStats(){
     showPage('page-stats');
     document.getElementById('stats-student-name').textContent = studentName || 'Pelajar';
+    
+    // Ensure stats structure is valid before displaying
+    ensureStatsStructure();
+    
     const ov=document.getElementById('stats-overview');
     const accuracy=getTotalAccuracy();
     
@@ -1429,27 +1773,36 @@ function showStats(){
     const labels=document.getElementById('stats-labels');
     let chartH='',labelH='';
     let weak=[];
-    for(let i=1;i<=12;i++){
+    for(let i=2;i<=12;i++){
         const s=stats['s'+i];
-        const pct=s.total>0?Math.round(s.correct/s.total*100):0;
+        const pct=s&&s.total>0?Math.round(s.correct/s.total*100):0;
+        const correctVal = s?s.correct:0;
+        const totalVal = s?s.total:0;
         let color=pct>=80?'from-green-400 to-green-500':pct>=50?'from-yellow-400 to-yellow-500':'from-red-400 to-red-500';
-        if(s.total===0)color='from-gray-200 to-gray-300';
-        chartH+=`<div class="bar-chart-bar flex-1 bg-gradient-to-t ${color}" style="height:${Math.max(pct,5)}%"></div>`;
+        if(s && s.total===0)color='from-gray-200 to-gray-300';
+        chartH+=`<div class="bar-chart-bar flex-1 bg-gradient-to-t ${color} relative group cursor-help" style="height:${Math.max(pct,5)}%" title="Sifir ${i}: ${correctVal}/${totalVal} (${pct}%)"></div>`;
         labelH+=`<span>${i}</span>`;
-        if(pct<60&&s.total>0)weak.push(i);
+        if(pct<60&&s&&s.total>0)weak.push(i);
     }
     chart.innerHTML=chartH;labels.innerHTML=labelH;
     const sug=document.getElementById('stats-suggestion');
-    if(weak.length>0)sug.textContent=`💡 Tumpukan latihan pada sifir ${weak.join(', ')}.`;
+    if(weak.length>0)sug.textContent=`💡 Fokus latihan sifir ${weak.join(', ')}.`;
     else sug.textContent='🌟 Hebat! Teruskan usaha anda!';
 }
 function getTotalAccuracy(){
     let c=0,t=0;
-    for(let i=1;i<=12;i++){c+=stats['s'+i].correct;t+=stats['s'+i].total;}
+    ensureStatsStructure();
+    for(let i=2;i<=12;i++){
+        if(stats['s'+i] && typeof stats['s'+i].correct === 'number' && typeof stats['s'+i].total === 'number') {
+            c+=stats['s'+i].correct;
+            t+=stats['s'+i].total;
+        }
+    }
     return t>0?Math.round(c/t*100):0;
 }
 function recordSifir(a,b,correct){
     // record for both sifir a and sifir b
+    ensureStatsStructure();
     if(stats['s'+a]){stats['s'+a].total++;if(correct)stats['s'+a].correct++;}
     if(a!==b&&stats['s'+b]){stats['s'+b].total++;if(correct)stats['s'+b].correct++;}
     saveStats();
@@ -1502,31 +1855,6 @@ function fireConfetti(){
 function playSound(){
     try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.setValueAtTime(523,ctx.currentTime);osc.frequency.setValueAtTime(659,ctx.currentTime+0.1);osc.frequency.setValueAtTime(784,ctx.currentTime+0.2);gain.gain.setValueAtTime(0.3,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.4);osc.start();osc.stop(ctx.currentTime+0.4);}catch(e){}
 }
-
-// ===== CARA MUDAH SIFIR & TEKNIK JARI =====
-let currentFingerMultiplier = 1;
-let cubaSendiriMode = false;
-let currentChallengeNum = 1;
-
-// Sifir 2 states
-let currentSifir2Multiplier = 1;
-let sifir2ChallengeMode = false;
-let currentSifir2Challenge = 1;
-
-// Sifir 5 states
-let currentSifir5Multiplier = 1;
-let sifir5ChallengeMode = false;
-let currentSifir5Challenge = 1;
-
-// Sifir 10 states
-let currentSifir10Multiplier = 1;
-let sifir10ChallengeMode = false;
-let currentSifir10Challenge = 1;
-
-// Sifir 11 states
-let currentSifir11Multiplier = 1;
-let sifir11ChallengeMode = false;
-let currentSifir11Challenge = 1;
 
 function showCaraMudahMenu() {
     showPage('page-cara-mudah-menu');
@@ -2264,178 +2592,19 @@ function prevFingerMultiplier() {
 
 function playSoftClick() {
     try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.connect(gain); gain.connect(ctx.destination);
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(1200, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.05);
-        gain.gain.setValueAtTime(0.08, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
-        osc.start(); osc.stop(ctx.currentTime + 0.05);
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+        osc.start(now); osc.stop(now + 0.05);
     } catch(e){}
 }
-
-// Dedicated sound effects generator using Web Audio API
-const gameSounds = {
-    flip() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(150, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.15);
-            gain.gain.setValueAtTime(0.15, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-            osc.start(); osc.stop(ctx.currentTime + 0.15);
-        } catch(e){}
-    },
-    match() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc1 = ctx.createOscillator();
-            const osc2 = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc1.connect(gain); osc2.connect(gain); gain.connect(ctx.destination);
-            osc1.type = 'sine'; osc2.type = 'sine';
-            osc1.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-            osc1.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
-            osc2.frequency.setValueAtTime(783.99, ctx.currentTime + 0.1); // G5
-            osc2.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.2); // C6
-            gain.gain.setValueAtTime(0.2, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-            osc1.start(); osc2.start();
-            osc1.stop(ctx.currentTime + 0.35); osc2.stop(ctx.currentTime + 0.35);
-        } catch(e){}
-    },
-    wrong() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(220, ctx.currentTime);
-            osc.frequency.linearRampToValueAtTime(110, ctx.currentTime + 0.3);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-            osc.start(); osc.stop(ctx.currentTime + 0.3);
-        } catch(e){}
-    },
-    victory() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00, 987.77, 1046.50];
-            notes.forEach((freq, index) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain); gain.connect(ctx.destination);
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.08);
-                gain.gain.setValueAtTime(0, ctx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + index * 0.08 + 0.01);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + index * 0.08 + 0.25);
-                osc.start(ctx.currentTime + index * 0.08);
-                osc.stop(ctx.currentTime + index * 0.08 + 0.25);
-            });
-        } catch(e){}
-    },
-    pop() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(800, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.3, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-            osc.start(); osc.stop(ctx.currentTime + 0.08);
-        } catch(e){}
-    },
-    whoosh() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const bufferSize = ctx.sampleRate * 0.4;
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'bandpass';
-            filter.frequency.setValueAtTime(200, ctx.currentTime);
-            filter.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.3);
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0.15, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-            noise.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
-            noise.start(); noise.stop(ctx.currentTime + 0.4);
-        } catch(e){}
-    },
-    chooChoo() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            // First chug
-            const osc1 = ctx.createOscillator();
-            const gain1 = ctx.createGain();
-            osc1.connect(gain1); gain1.connect(ctx.destination);
-            osc1.type = 'sawtooth';
-            osc1.frequency.setValueAtTime(80, ctx.currentTime);
-            gain1.gain.setValueAtTime(0.15, ctx.currentTime);
-            gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-            osc1.start(); osc1.stop(ctx.currentTime + 0.15);
-
-            // Second chug
-            const osc2 = ctx.createOscillator();
-            const gain2 = ctx.createGain();
-            osc2.connect(gain2); gain2.connect(ctx.destination);
-            osc2.type = 'sawtooth';
-            osc2.frequency.setValueAtTime(110, ctx.currentTime + 0.15);
-            gain2.gain.setValueAtTime(0, ctx.currentTime);
-            gain2.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.15);
-            gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-            osc2.start(ctx.currentTime + 0.15); osc2.stop(ctx.currentTime + 0.3);
-        } catch(e){}
-    },
-    wheelSpin() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(300, ctx.currentTime);
-            for (let i = 0; i < 20; i++) {
-                osc.frequency.setValueAtTime(200 + (i % 2) * 200, ctx.currentTime + i * 0.1);
-            }
-            gain.gain.setValueAtTime(0.1, ctx.currentTime);
-            gain.gain.setValueAtTime(0.1, ctx.currentTime + 1.8);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 2.0);
-            osc.start(); osc.stop(ctx.currentTime + 2.0);
-        } catch(e){}
-    },
-    wheelStop() {
-        try {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.connect(gain); gain.connect(ctx.destination);
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(600, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.25);
-            gain.gain.setValueAtTime(0.2, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-            osc.start(); osc.stop(ctx.currentTime + 0.25);
-        } catch(e){}
-    }
-};
 
 lucide.createIcons();
 </script>
